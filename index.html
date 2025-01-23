@@ -1,49 +1,86 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Añadido para responsive -->
     <title>Random Case Converter</title>
     <style>
         body {
-            margin: 20px;
+            margin: 0;
+            padding: 20px;
             font-family: Arial, sans-serif;
+            box-sizing: border-box;
         }
+        
+        .container {  <!-- Contenedor nuevo para mejor control -->
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
         #inputText, #outputText {
             width: 100%;
             padding: 10px;
             font-family: monospace;
             margin-bottom: 10px;
             border: 1px solid #ccc;
+            box-sizing: border-box; /* Añadido para incluir padding en el ancho */
+            font-size: 16px; /* Mejor legibilidad en móviles */
         }
+        
         #outputText {
             background-color: #f2f2f2;
         }
+        
         #buttons-container {
             display: flex;
             margin-bottom: 10px;
+            gap: 10px; /* Reemplaza el margen izquierdo para mejor responsividad */
+            flex-wrap: wrap; /* Para dispositivos muy pequeños */
         }
+        
         #buttons-container button {
-            padding: 10px 20px;
+            padding: 12px 20px;
             background-color: #4CAF50;
             color: white;
             border: none;
             cursor: pointer;
+            flex: 1; /* Botones que se expanden igualmente */
+            min-width: 120px; /* Ancho mínimo para mantener legibilidad */
         }
+        
         #buttons-container button:hover {
             background-color: #45a049;
         }
-        #buttons-container button + button {
-            margin-left: 10px;
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            #buttons-container {
+                flex-direction: column; /* Apila botones verticalmente */
+            }
+            
+            #buttons-container button {
+                width: 100%; /* Botones a ancho completo */
+                min-width: auto;
+            }
+            
+            #inputText, #outputText {
+                rows: 8; /* Menor altura en móviles */
+            }
         }
     </style>
 </head>
 <body>
-
-<textarea id="inputText" rows="10" cols="30"></textarea><br>
-<div id="buttons-container">
-    <button onclick="convertText()">Convert</button>
-    <button id="copyButton" onclick="copyResult()">Copy Result</button>
-</div><br>
-<textarea id="outputText" rows="10" cols="30" readonly></textarea>
+<div class="container"> <!-- Contenedor nuevo añadido -->
+    <textarea id="inputText" rows="10" placeholder="Enter text here..."></textarea>
+    <div id="buttons-container">
+        <button onclick="convertText()">Convert</button>
+        <button id="copyButton" onclick="copyResult()">Copy Result</button>
+    </div>
+    <textarea id="outputText" rows="10" readonly></textarea>
+</div>
 
 <script>
 function convertText() {
@@ -73,6 +110,5 @@ async function copyResult() {
     }
 }
 </script>
-
 </body>
 </html>
